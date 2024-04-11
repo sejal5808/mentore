@@ -1,0 +1,84 @@
+<section>
+	<div class="container">
+		<div class="row  d-flex justify-content-center p-5">
+			<div class="col-md-10 col-lg-10 ">
+				<div class="card mb-3  p-3">
+					<div class="card-body">
+						<form #LoginForm="ngForm" >
+							<div class="row g-0 ">
+								<div class="col-md-4 ">
+									<div class="col-md-12 mb-3 profile-card text-center">
+										<label for="image" class=" position-relative">
+											<img loading="lazy" src="assets/img/download (8).jpeg" alt="Profile Image"
+											class="rounded-circle  border border-secondary"
+											*ngIf="!formObj.image && !isEditImage" width="200px" height="200px">
+											<img loading="lazy" [src]="formObj.image" alt="Profile Image"
+											class="rounded-circle border border-secondary"
+											*ngIf="formObj.image && isEditImage" width="200px" height="200px">
+											<img loading="lazy" [src]="formObj.image"
+											alt="Profile Image" class="rounded-circle border border-secondary"
+											*ngIf="formObj.image && !isEditImage" width="200px" height="200px"> 
+
+									</label>
+									<input type="file" class="form-control d-none" (change)="uplodImg($event)"
+									id="image" accept="image/png, image/jpeg, image/jpg" name="image" >
+								</div>
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">@</span>
+										<input type="text" class="form-control" placeholder="Username"
+										[(ngModel)]="formObj.username" #username="ngModel" aria-label="Username"
+										aria-describedby="basic-addon1" name="name">
+									</div>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">@example.com</span>
+										<input type="text" class="form-control" placeholder="Email"
+										[(ngModel)]="formObj.email" #email="ngModel"
+										aria-describedby="basic-addon1" name="email">
+									</div>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">phone</span>
+										<input type="text" class="form-control" placeholder="phone"
+										[(ngModel)]="formObj.phone" #phone="ngModel"
+										aria-describedby="basic-addon1" name="phone">
+									</div>
+									<div class="input-group mb-3">
+										<span class="input-group-text" id="basic-addon1">Password</span>
+										<input type="text" class="form-control" placeholder="password"
+										[(ngModel)]="formObj.password" #password="ngModel"
+										aria-describedby="basic-addon1" name="password">
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inlineRadioOptions"
+										[(ngModel)]="formObj.gender" #gender="ngModel" id="male" value="Male"
+										checked required>
+										<label class="form-check-label text-light" for="home">Male</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="inlineRadioOptions"
+										[(ngModel)]="formObj.gender" #gender="ngModel" id="female" value="Female"
+										checked required>
+										<label class="form-check-label text-light" for="home">Female</label>
+									</div>
+
+
+
+								</div>
+								<div class="pt-3 text-center">
+									<button class="get-started-btn bg-light text-dark fw-bold" href="" (click)=update(LoginForm)>Update</button>
+
+								</div>
+							</div>
+						</div>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+</section>

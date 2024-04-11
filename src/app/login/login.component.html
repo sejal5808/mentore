@@ -1,0 +1,40 @@
+<div class="container ">
+  <div class="row m-5">
+    <div class="col-md-6 ffset-md-4 col-sm-6 offset-sm-3 mt-5">
+      <div class="card auth p-5">
+        <div class="card-body auth-card">
+          <form #LoginForm="ngForm">
+            <div class="form-group mb-3">
+              <label for="email">Email : </label>
+              <input type="text" name="email" class="form-control" placeholder="email" [(ngModel)]="userData.email"
+                #email="ngModel" required>
+              <div class="text-danger mt-2" *ngIf="email.errors && LoginForm.submitted">
+                <span *ngIf="email.errors['required']">Email is required</span>
+              </div>
+            </div>
+            <div class="form-group mb-3 position-relative">
+              <label for="password">Password : </label>
+              <input [type]="passwordType" name="password" class="form-control" placeholder="********"
+                [(ngModel)]="userData.password" #password="ngModel" required>
+              <div class="position-absolute me-2 end-0 top-50 pointer">
+                <i  [ngClass]="{' bi bi-eye-fill':!showPassOption,'bi bi-eye-slash-fill': showPassOption }"
+               
+                  (click)="changePassType()"></i>
+              </div>
+              <div class="text-danger mt-2" *ngIf="password.errors && LoginForm.submitted">
+                <span *ngIf="password.errors['required']">Password is required</span>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="get-started-btn" (click)="login(LoginForm)">
+                Login</button>
+            </div>
+          </form>
+          <div class="text-center sign-up">
+            Don`t have an account ? <a routerLink="/register">Sign Up</a> hera.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row m-5">
+  <div class="col-md-4 offset-md-4 col-sm-6 offset-sm-3 mt-5">
+    <div class="card auth">
+      <div class="card-body auth-card">
+        <form #LoginForm="ngForm">
+          <div class="form-group mb-3">
+            <label for="name">Name : </label>
+            <input type="text" name="username" class="form-control" placeholder="Name" [(ngModel)]="userData.username"
+              #username="ngModel" required>
+            <div class="text-danger mt-2" *ngIf="username.errors && LoginForm.submitted">
+              <span *ngIf="username.errors['required']">Name is required</span>
+            </div>
+          </div>
+          <div class="form-group  mb-3">
+            <label for="phone">Phone : </label>
+            <input type="text" name="phone" class="form-control" placeholder="Phone" [(ngModel)]="userData.phone"
+              #phone="ngModel" minlength="10" maxlength="10" appNumberonly required>
+            <div class="text-danger mt-2" *ngIf="phone.errors && LoginForm.submitted">
+              <span *ngIf="phone.errors['required']">Phone is required</span>
+            </div>
+          </div>
+          <div class="form-group  mb-3">
+            <label for="email">Email : </label>
+            <input type="text" name="email" class="form-control" placeholder="Email" [(ngModel)]="userData.email"
+              #email="ngModel" required>
+            <div class="text-danger mt-2" *ngIf="email.errors && LoginForm.submitted">
+              <span *ngIf="email.errors['required']">Email is required</span>
+            </div>
+          </div>
+          <div class="form-group mb-3 position-relative">
+            <label for="password">Password : </label>
+            <input [type]="passwordType" name="password" class="form-control " placeholder="********"
+              [(ngModel)]="userData.password" #password="ngModel" required>
+            <div class="position-absolute end-0 top-50">
+              <i class="me-2 pointer"
+                [ngClass]="{' bi bi-eye-fill':!showPassOption,'bi bi-eye-slash-fill': showPassOption }"
+                aria-hidden="true" (click)="changePassType()"></i>
+            </div>
+            <div *ngIf="password.errors && LoginForm.submitted" class="text-danger mt-2">
+              <span *ngIf="password.errors['required']">
+                Password is required
+              </span>
+            </div>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="get-started-btn" (click)="register(LoginForm)">
+              Register
+            </button>
+          </div>
+          <div class="text-center login">
+            Already have an account ? <a routerLink="/login">Login</a> hera.
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

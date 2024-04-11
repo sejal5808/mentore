@@ -1,0 +1,87 @@
+<div class="container m-5">
+  <div class="sidebar">
+    <!-- User profile section -->
+    <div class="profile pointer position-relative" *ngFor="let user of getdata " (click)="selectUser(user)">
+      <div class="profile-image ">
+        <!-- Display user profile image -->
+        <img loading="lazy" src="assets/img/download (8).jpeg" *ngIf="!user.image" alt="Profile Image"
+          class="rounded-circle borderbg  " width="200px" height="200px">
+        <img loading="lazy" [src]="user.image" *ngIf="user.image" alt="Profile Image" class="rounded-circle borderbg "
+          width="200px" height="200px">
+        <span *ngIf="onlineuser.includes(user._id)" class="sidebar-status-indicator "></span>
+        <span *ngIf="!onlineuser.includes(user._id)" class="sidebar-status "></span>
+
+      </div>
+      <div class="profile-name">
+        <!-- Display user's name -->
+        {{ user.username }} {{user.username == this.socketService.loginData.username ? "(Yourself)" : '' }}
+        <div [ngClass]="onlineuser.includes(user._id) ? 'Online' : 'Offline'">
+          {{onlineuser.includes(user._id) ? 'Online' : 'Offline'}}
+        </div>
+      </div>
+    </div>
+
+    <!-- List of online users -->
+    <div class="online-users">
+      <!-- <div *ngFor="let onlineUser of onlineUsers"> -->
+      <!-- Display online users -->
+      <!-- {{ onlineUser.name }} -->
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <div class="chat-area">
+    <div *ngIf="selectedUser" class="bg">
+      <span class="text-light"> <span class="fs-4">
+          Chat with..
+        </span> <img loading="lazy" [src]="selectedUser.image" *ngIf="selectedUser.image" alt="Profile Image"
+          class="rounded-circle  border border-secondary" width="50px" height="50px">
+        <span class="fs-4 text-capitalize">
+          {{selectedUser.username }} {{selectedUser.username == this.socketService.loginData.username ? "(Yourself)" :
+          '' }}
+        </span>
+
+      </span>
+
+    </div>
+    <div class="chat-messages pt-2">
+      <div *ngFor="let message of messages; index as i;">
+        <div *ngIf="message.senderId != this.socketService.loginData._id">
+          <div class="row">
+
+            <div class="message col-6 sender text-start" (dblclick)="remove(i,message)">
+              <span class="p-3">
+                {{ message.content }}
+              </span>
+            </div>
+            <div class="col-6">
+
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="message.senderId === this.socketService.loginData._id">
+          <div class="row">
+            <div class="col-6">
+
+            </div>
+            <div class="message col-6 receiver text-end" (dblclick)="remove(i,message)">
+              <span class="p-3">
+                {{ message.content }}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat input area -->
+    <div class="chat-input">
+      <input type="text" [(ngModel)]="newMessage"
+        [placeholder]="selectedUser?.username ? 'Send message to ' + selectedUser.username : 'Send message'">
+
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

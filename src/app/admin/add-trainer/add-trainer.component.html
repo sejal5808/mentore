@@ -1,0 +1,172 @@
+<div class="container">
+    <div class="row">
+        <div class=" d-flex mt-5 fs-3 justify-content-end pointer" (click)="openDataModal('Add','')">
+            <i class="bi bi-plus-square"></i>
+        </div>
+        <table class="table mt-5 border">
+            <thead class="tble">
+                <tr>
+                    <th class="col-2 tble">#</th>
+                    <th class=" col-2 tble">Image</th>
+                    <th class=" col-2 tble">Name</th>
+                    <th class=" col-2  tble">Roll</th>
+                    <th class=" col-2 tble">Phone</th>
+                    <th class="col-2 tble">Gender</th>
+                    <th class=" col-2 tble">Description</th>
+                    <th class="col-2 tble">Status</th>
+                    <th class=" col-2 tble">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of getdata">
+                    <td>
+                        <div class="form-check mt-0 mb-0 d-inline-block me-2 pointer">
+                            <label class="form-check-label" for="same-checkbox{{i.id}}">
+                                <input type="checkbox" class="form-check-input ms-2" id="same-checkbox{{i.id}}"
+                                    value="{{i.status}}" (change)="actdeactCheckbox($event, i)"
+                                    [checked]="i.status =='1'" />
+                                <i class="input-helper"></i>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <img [src]="serive.imageUrl+'Trainer'+'/' + i.image" width="50px" height="50px">
+                    </td>
+                    <td>
+                        {{i.gender === 'Male' ? 'Mr.' : 'Ms.'}} {{i.name}}
+                    </td>
+                    <td>{{i.roll}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.gender}}</td>
+                    <td>{{i.description}}</td>
+                    <td>
+                        <label class="badge bg-danger" *ngIf="i.status == 0">Deactive</label>
+                        <label class="badge bg-success" *ngIf="i.status == 1">Active</label>
+                    </td>
+                    <td>
+                        <i class="bi bi-pencil-square fs-5 me-2   pointer" (click)="openDataModal('Edit', i)"></i>
+                        <i class="bi bi-trash-fill fs-5 pointer" (click)="delete(i,'Trainer', getdata)"></i>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>{{modalLable}} Trainer</h4>
+            </div>
+            <form #dataForm="ngForm" name="form">
+                <div class="modal-body">
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="name..."
+                            [(ngModel)]="formObj.name" #name="ngModel" required>
+                        <div class="text-danger mt-2" *ngIf="name.errors && dataForm.submitted">
+                            <span *ngIf="name.errors['required']">Name is required</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="Phone" class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="Phone" name="Phone" placeholder="Phone..."
+                            [(ngModel)]="formObj.phone" #phone="ngModel" required minlength="10" maxlength="10"
+                            appNumberonly>
+                        <div class="text-danger mt-2" *ngIf="phone.errors && dataForm.submitted">
+                            <span *ngIf="phone.errors['required']">Phone is required</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="roll" class="form-label">Roll</label>
+                        <input type="text" class="form-control" id="roll" name="roll" placeholder="roll..."
+                            [(ngModel)]="formObj.roll" #roll="ngModel" required>
+                        <div class="text-danger mt-2" *ngIf="roll.errors && dataForm.submitted">
+                            <span *ngIf="roll.errors['required']">roll is required</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="roll" class="form-label">Expertise</label>
+
+                        <div class="form-check">
+                            <div *ngFor="let i of expertise; let idx = index">
+                                <input class="form-check-input" type="checkbox" [value]="i.name" [name]="i.name+idx"
+                                    [id]="i.name+idx" [checked]="isCheckedFunc(i.name, idx)"
+                                    (change)="checked($event,i)">
+                                {{i.name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <input type="description" class="form-control" id="description" name="description"
+                            placeholder="description..." [(ngModel)]="formObj.description" #description="ngModel"
+                            required>
+                        <div class="text-danger mt-2" *ngIf="description.errors && dataForm.submitted">
+                            <span *ngIf="description.errors['required']">description is required</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div><label class="form-check-label pb-2">Gender<span class="font_valid">*</span>
+                            </label></div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="male"
+                                value="Male" [(ngModel)]="formObj.gender" #gender="ngModel" checked required>
+                            <label class="form-check-label" for="home">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="female"
+                                value="Female" [(ngModel)]="formObj.gender" #gender="ngModel" checked required>
+                            <label class="form-check-label" for="home">Female</label>
+                        </div>
+                        <div *ngIf="gender.errors?.['required'] && dataForm.submitted" class="font_valid">
+                            Gender is required.
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 mb-3">
+                        <label for="status" class="form-label">Status<sup class="text-danger">*</sup></label>
+                        <select class="form-select" id="status" name="status" aria-label="Default select example"
+                            [(ngModel)]="formObj.status" #status="ngModel" required>
+                            <option selected disabled value="">Select status</option>
+                            <option value="1">Active</option>
+                            <option value="0">Deactive</option>
+                        </select>
+                        <div class="text-danger mt-2" *ngIf="status.errors && dataForm.submitted">
+                            <span *ngIf="status.errors['required']">status is required</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <input type="file" (change)="uploadFile($event)" lass="form-control" id="image" name="image"
+                            placeholder="image..." #image required>
+                        <img src="{{img}}" alt="" *ngIf="img && editFile" width="50px" height="50px">
+                        <img [src]="serive.imageUrl+'Trainer'+'/' + formObj.image" *ngIf="formObj.image && !editFile"
+                            width="50px" height="50px">
+                        <div class="text-danger mt-2" *ngIf="dataForm.submitted && this.formObj.image == ''">
+                            Image is required
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" (click)="closeModel()">Close</button>
+                    <button type="button" class="btn" [ngClass]="modalLable == 'Add' ? 'btn-success':'btn-success'"
+                        (click)="modalLable == 'Add' ? submit(dataForm):edit(dataForm)">{{modalLable == 'Add' ? 'Save':
+                        'Edit'}}
+                    </button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div *ngIf="!getdata.length" class="fs-3 text-center">
+    Trainer Not Found..
+</div>

@@ -1,0 +1,16 @@
+.loginIcon{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.dropdown-toggle::after{
+    transform: rotate(0deg);
+    margin-left: 6px;
+    vertical-align: middle;
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    transition: .5s;
+}

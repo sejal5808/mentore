@@ -1,0 +1,50 @@
+
+app-header {
+    position:fixed;
+    top:0;
+    left:0;
+    padding: 0;
+    z-index: 999;
+    height:4rem;
+    width: 100%;
+    transition: left .3s ease;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.main{
+    position: absolute;
+    top:4rem;
+    left:250px;
+    width: calc(100% - 250px);
+    transition: .3s ease;
+}
+
+.main-expand {
+    position:absolute;
+    top:4rem;
+    left:0;
+    width:100%;
+    transition: .3s ease;
+}
+
+ .sidebar-open {
+    position:fixed;
+    width: 250px;
+    left:0;
+    top:4rem;
+    transition: .3s ease;
+}
+
+.sidebar-collapse {
+    position:fixed;
+    left:-250px;
+    top:4rem;
+    transition: .3s ease;
+}
+
+
+
+
+
+

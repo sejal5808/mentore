@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row">
+      <div class=" d-flex mt-5 fs-3 justify-content-end" (click)="openDataModal('add','')"><i
+          class="bi bi-plus-square"></i></div>
+      <table class="table mt-5 border">
+        <thead class="tble">
+          <tr>
+            <th class=" col-2 tble">Name</th>
+            <th class=" col-2  tble">First Name</th>
+            <th class=" col-2 tble">Last Name</th>
+            <th class=" col-2 tble">Email</th>
+            <th class=" col-2 tble">Image</th>
+            <th class=" col-2 tble">Mobile No</th>
+            <th class=" col-2 tble">action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of getdata">
+            <td>
+              {{i.name}}
+            </td>
+            <td>{{i.firstName}}</td>
+            <td>{{i.lastName}}</td>
+            <td>{{i.email}}</td>
+            <td>
+              <img [src]="serive.imageUrl+'/'+ i.image">
+            </td>
+            <td>{{i.Mobile_no}}</td>
+            <td>
+              <i class="bi bi-pencil fs-4" (click)="openDataModal('edit',i)"></i>
+              <i class="bi bi-trash3 fs-4 ms-3" (click)="delete(i,getdata)"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div>
+      <div>
+        <input type="file" (change)="serive.onFileSelected($event)">
+      </div>
+      <!-- <button (click)="serive.upload()">Upload</button> -->
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4>add data</h4>
+        </div>
+        <form #dataForm="ngForm" name="form">
+          <div class="modal-body">
+            <div class="col-12 col-md-12 mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="name..."
+                [(ngModel)]="formObj.name" #name="ngModel">
+              <!--    <div class="text-danger mt-2" *ngIf="name.errors && data.submitted">
+                          <span *ngIf="name.errors['required']">Name is required</span>
+                       </div> -->
+            </div>
+  
+            <div class="col-12 col-md-12 mb-3">
+              <label for="firstName" class="form-label">firstName</label>
+              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="firstName..."
+                [(ngModel)]="formObj.firstName" #firstName="ngModel">
+            </div>
+            <div class="col-12 col-md-12 mb-3">
+              <label for="lirstName" class="form-label">lastName</label>
+              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName..."
+                [(ngModel)]="formObj.lastName" #lastName="ngModel">
+            </div>
+            <div class="col-12 col-md-12 mb-3">
+              <label for="Mobile_no" class="form-label">Mobile_no</label>
+              <input type="text" class="form-control" id="Mobile_no" name="Mobile_no" placeholder="Mobile_no..."
+                [(ngModel)]="formObj.Mobile_no" #Mobile_no="ngModel">
+            </div>
+            <div class="col-12 col-md-12 mb-3">
+              <label for="email" class="form-label">email</label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="email..."
+                [(ngModel)]="formObj.email" #email date="ngModel">
+            </div>
+            <div class="col-12 col-md-12 mb-3">
+              <label for="Uplaod Image">
+                Uplaod Image
+              </label>
+              <input type="file" (change)="serive.onFileSelected($event)" lass="form-control" id="image" name="image" placeholder="image..."
+              [(ngModel)]="formObj.image" #image date="ngModel">
+
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModel()">Close</button>
+            <button type="button" class="btn btn-secondary" *ngIf="modalLable == 'add'" (click)="submit(dataForm)">Save
+            </button>
+            <button type="button" class="btn btn-secondary" *ngIf="modalLable != 'add'" (click)="update(dataForm)">Update
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

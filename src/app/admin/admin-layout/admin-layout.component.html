@@ -1,0 +1,10 @@
+<div class="main-layout" id="admin">
+    <app-header id="admin_header"></app-header>
+    <div class="sidebar-open" [ngClass]="gs.isSidebarActive ? 'sidebar-open' : 'sidebar-collapse'">
+        <app-sidebar id="admin_sidebar"></app-sidebar>
+    </div>
+
+    <div class="main container-fluid" [ngClass]="gs.isSidebarActive? 'main':'main-expand'">
+        <router-outlet></router-outlet>
+    </div>
+</div>

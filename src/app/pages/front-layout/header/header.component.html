@@ -1,0 +1,31 @@
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto"><a >Mentor</a></h1>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a class="active" routerLink="home">Home</a></li>
+        <li><a routerLink="/about">About</a></li>
+        <li><a routerLink="/courses">Courses</a></li>
+        <li><a routerLink="/trainer">Trainers</a></li>
+        <li><a routerLink="/event">Events</a></li>
+        <!-- <li class="dropdown" ><a><span>Admin</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a routerLink="/list">Add Courses</a></li>
+            <li><a routerLink="/Add-trainer">Add Trainers</a></li>
+            <li><a routerLink="Add-Event">Add Event</a></li>
+            <li><a routerLink="login" *ngIf="!servise.loginData._id">Login</a></li>
+            <li><a routerLink="/register" *ngIf="!servise.loginData._id">Register</a></li>
+            <li><a (click)="logout()">Logout</a></li>
+          </ul>
+        </li> -->
+        <li><a routerLink="/my-Profile" *ngIf="servise.loginData._id">My Profile</a></li>
+
+        <li><a routerLink="contact">Contact</a></li>
+        <li><a routerLink="chat">Chat</a></li>
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+    <a class="get-started-btn pointer" (click)="logout()">Log Out</a>
+  </div>
+</header>

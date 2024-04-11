@@ -1,0 +1,122 @@
+<div class="container">
+    <div class="row">
+        <div class=" d-flex mt-5 fs-3 justify-content-end pointer" (click)="openDataModal('Add','')">
+            <i class="bi bi-plus-square"></i>
+        </div>
+        <table class="table mt-5 border">
+            <thead class="tble">
+                <tr>
+                    <th class=" col-2 tble">Name</th>
+                    <th class=" col-2  tble">SubTitle</th>
+                    <th class=" col-2 tble">Price</th>
+                    <th class=" col-2 tble">Description</th>
+                    <th class=" col-2 tble">Image</th>
+                    <th class=" col-2 tble">action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of getdata">
+                    <td>
+                        {{i.name}}
+                    </td>
+                    <td>{{i.SubTitle}}</td>
+                    <td>{{i.price}}</td>
+                    <td>{{i.description}}</td>
+                    <td>
+                        <img [src]="serive.imageUrl+'Course'+'/' + i.image[0]" width="50px" height="50px">
+                    </td>
+                    <td>
+                        <i class="bi-pencil-square fs-5 pointer" (click)="openDataModal('Edit',i)"></i>
+                        <i class="bi bi-trash-fill fs-5 ms-3 pointer" (click)="delete(i,'Course',getdata)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>{{modalLable}} Course</h4>
+            </div>
+            <form #dataForm="ngForm" name="form">
+                <div class="modal-body">
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="name..."
+                            [(ngModel)]="formObj.name" #name="ngModel" required>
+                        <div class="text-danger mt-2" *ngIf="name.errors && dataForm.submitted">
+                            <span *ngIf="name.errors['required']">Name is required</span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="price" class="form-label">price</label>
+                        <input type="text" class="form-control" id="price" name="price" placeholder="price..."
+                            [(ngModel)]="formObj.price" #price="ngModel" required appNumberonly>
+                        <div class="text-danger mt-2" *ngIf="price.errors && dataForm.submitted">
+                            <span *ngIf="price.errors['required']">price is required</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="lirstName" class="form-label">SubTitle</label>
+                        <input type="text" class="form-control" id="SubTitle" name="SubTitle" placeholder="SubTitle..."
+                            [(ngModel)]="formObj.SubTitle" #SubTitle="ngModel" required>
+                        <div class="text-danger mt-2" *ngIf="SubTitle.errors && dataForm.submitted">
+                            <span *ngIf="SubTitle.errors['required']">SubTitle is required</span>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="description" class="form-label">description</label>
+                        <input type="description" class="form-control" id="description" name="description"
+                            placeholder="description..." [(ngModel)]="formObj.description" #description="ngModel"
+                            required>
+                        <div class="text-danger mt-2" *ngIf="description.errors && dataForm.submitted">
+                            <span *ngIf="description.errors['required']">description is required</span>
+                        </div>
+                    </div>
+                 <div>
+                    <div class="custom-dropzone" ngx-dropzone [accept]="'image/*'" (change)="onSelect($event,'CourseImage')">
+                        <ngx-dropzone-label>Drop it!</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview"  #image  *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-image-preview>
+                    </div>
+                    <div *ngFor="let f of formObj.image " class="d-inline" >
+                        <div class="d-inline hovverEffect">
+                            <img [src]="serive.imageUrl+'Course'+'/' + f"  width="60px" class="p-1 image"
+                            height="60px" >
+                            <div class="middle">
+                                <div>
+                                    <i class="bi bi-trash3 fs-4 ms-3 pointer text" (click)="remove(f)" ></i>
+
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                 </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" (click)="closeModel()">Close</button>
+                    <button type="button" class="btn btn-success" *ngIf="modalLable == 'Add'"
+                        (click)="submit(dataForm)">Save
+                    </button>
+                    <button type="button" class="btn btn-success" *ngIf="modalLable != 'Add'"
+                        (click)="update(dataForm)">Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div *ngIf="!getdata.length" class="fs-3 text-center">
+    Course Not Found..
+    </div>

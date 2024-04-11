@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "name": "test",
+      "country": "india",
+      "slogan": "test",
+      "createdAt": "2023-09-10",
+      "established": "2023-09-03",
+      "id": 1
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}

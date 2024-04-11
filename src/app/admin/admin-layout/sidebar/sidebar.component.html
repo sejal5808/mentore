@@ -1,0 +1,27 @@
+<div class="container main ">
+    <div class="sidebar-profile">
+        <div class="sidebar-profile-image pe-2">
+            <img loading="lazy" src="/assets/img/download (8).jpeg" alt="image">
+        </div>
+        <div>
+            <p class="sidebar-name text-dark"> Super Admin </p>
+            <p class="sidebar-designation text-dark"> Welcome </p>
+        </div>
+    </div>
+
+    <div class="links">
+        <ul class="list-unstyled">
+            <li><a class="icon-link" [routerLink]="'/admin/dashboard'" routerLinkActive="active"> <span class="icon"><i
+                            class="fa-solid fa-table-columns"></i></span> Dashboard</a></li>
+            <li><a class="icon-link" [routerLink]="'/admin/Add-course'" routerLinkActive="active"><span class="icon"><i
+                            class="fa-solid fa-box"></i></span>Add Course</a></li>
+            <li><a class="icon-link" [routerLink]="'/admin/Add-Event'" routerLinkActive="active"><span class="icon"><i
+                            class="fa-solid fa-network-wired"></i></span>Add Event</a></li>
+            <li><a class="icon-link" [routerLink]="'/admin/Add-trainer'" routerLinkActive="active"><span class="icon"><i
+                            class="fa-solid fa-clipboard-question"></i></span>Add Triner</a></li>
+                           
+            <li><a class="icon-link" (click)="logOut()" routerLinkActive="active"><span class="icon"><i
+                            class="fa-solid fa-clipboard-question"></i></span>Log Out</a></li>
+        </ul>
+    </div>
+</div>
