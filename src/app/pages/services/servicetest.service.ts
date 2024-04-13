@@ -13,36 +13,36 @@ export class ServicetestService {
 
   private apiUrl = 'http://192.168.1.21:8000/api/';
   public imageUrl = 'http://192.168.1.21:8000/uploads/'
-  isLayoutSidebarActive:boolean = false;
+  isLayoutSidebarActive: boolean = false;
+  private socket;
 
   constructor(private http: HttpClient,) {
-    this.socket = io('http://192.168.1.21:8000', { transports : ['websocket'] });
-    this.socket.emit('login', this.loginData._id);
-   
-   }
+    // user conntection with server  
+    this.socket = io('http://192.168.1.21:8000', { transports: ['websocket'] });
+
+  }
 
 
-
-  private socket;    
+  //user coonect with server with id 
   connect(userId: string) {
     this.socket.emit('user_connected', userId);
   }
-  // sendMessage(message: string, recipientUserId: string) {
-  //   this.socket.emit('chat message', { message, recipientUserId });
-  // }
-  onlineuser(){
+
+  // get online conntectd user 
+  onlineuser() {
     return fromEvent(this.socket, 'user_connected');
   }
 
+  //receive messages 
   receiveMessages(): Observable<any> {
     return fromEvent(this.socket, 'private_message');
   }
 
+  //send message
+  sendPrivateMessage(message: any) {
+    this.socket.emit('private_message', message);
+  }
 
-
-sendPrivateMessage(message:any) {
-  this.socket.emit('private_message', message);
-}
   updateItem(id: string, item: any): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}/${id}`, item);
 
@@ -59,14 +59,14 @@ sendPrivateMessage(message:any) {
   }
 
   postApi(data: any, url: any) {
-    const token:any = localStorage.getItem('token'); // Retrieve token from local storage
+    const token: any = localStorage.getItem('token'); // Retrieve token from local storage
     // Attach token to request headers
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${JSON.parse(token)}`
     });
-    console.log("12322",headers)
+    console.log("12322", headers)
     return new Promise((resolve, rejects) => {
-      this.http.post(this.apiUrl + url, data,{headers}).subscribe((res: any) => {
+      this.http.post(this.apiUrl + url, data, { headers }).subscribe((res: any) => {
         resolve(res);
       }, (err) => {
         rejects(err);

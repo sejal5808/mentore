@@ -1,0 +1,36 @@
+
+<h3>Course</h3>
+
+<app-table [data]="courseData" [headers]="headers" (openModalEvent)="openModal($event)" (deleteEvent)="delete($event)" [senddata]="courseData"></app-table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{modalLabel}}</h5>
+                <button type="button" class="btn-close" (click)="closeModal()"></button>
+            </div>
+            <form #dataForm="ngForm" name="form">
+                <div class="modal-body">
+                    <div class="col-12">
+                        <label for="name"> Name: </label>
+                        <input type="text" name="name" id="name" [(ngModel)]="formObj.name" #name="ngModel"
+                            placeholder="Name">
+                    </div>
+                    <div class="col-12 pt-2">
+                        <label for="price"> Price: </label>
+                        <input type="text" name="price" id="price" [(ngModel)]="formObj.price" #price="ngModel"
+                            placeholder="Price">
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  (click)="closeModal()">Close</button>
+                <button type="button" class="btn btn-primary" *ngIf="modalLabel == 'add'" (click)="save(dataForm)">Save </button>
+                <button type="button" class="btn btn-primary" *ngIf="modalLabel != 'add'" (click)="update(dataForm)">Update</button>
+
+            </div>
+        </form>
+        </div>
+    </div>
+</div>

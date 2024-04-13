@@ -48,30 +48,31 @@
       <div *ngFor="let message of messages; index as i;">
         <div *ngIf="message.senderId != this.socketService.loginData._id">
           <div class="row">
-
             <div class="message col-6 sender text-start" (dblclick)="remove(i,message)">
               <span class="p-3">
-                {{ message.content }}
+                {{ message.content }} 
               </span>
             </div>
+            <span class="text-start pt-0 pb-3">
+            {{senddata | date:'h:mm a'}}
+            </span>
             <div class="col-6">
-
             </div>
           </div>
-
         </div>
         <div *ngIf="message.senderId === this.socketService.loginData._id">
           <div class="row">
             <div class="col-6">
-
             </div>
             <div class="message col-6 receiver text-end" (dblclick)="remove(i,message)">
               <span class="p-3">
                 {{ message.content }}
               </span>
             </div>
+            <span class="text-end pt-0 pb-3">
+              {{senddata | date:'h:mm a'}}
+            </span>
           </div>
-
         </div>
       </div>
     </div>
@@ -80,7 +81,6 @@
     <div class="chat-input">
       <input type="text" [(ngModel)]="newMessage"
         [placeholder]="selectedUser?.username ? 'Send message to ' + selectedUser.username : 'Send message'">
-
       <button (click)="sendMessage()">Send</button>
     </div>
   </div>

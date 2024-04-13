@@ -14,25 +14,27 @@ export class ChatComponent {
   getdata: any = [];
   delete: boolean = false;
   onlineuser: any = [];
+  senddata: any = '';
+
   constructor(public socketService: ServicetestService, private gb: GlobleService) { }
 
   ngOnInit() {
-    this.getDTa()
+    this.getDTa();
     this.socketService.connect(this.socketService.loginData._id);
     this.online();
-
-
     this.socketService.receiveMessages().subscribe((message: any) => {
       this.messages.push(message);
     });
   }
+
+  //get online user 
   online() {
     this.socketService.onlineuser().subscribe((data: any) => {
       this.onlineuser = data;
-      console.log("msg", data)
     })
   }
 
+  //send message to online user
   sendMessage() {
     if (!this.selectedUser) {
       return this.socketService.toaster("error", 'select user ');
@@ -49,24 +51,22 @@ export class ChatComponent {
     this.socketService.sendPrivateMessage(message);
 
     this.messages.push(message);
+    this.data();
     this.newMessage = '';
   }
+  //select user for send message
   selectUser(user: any) {
     this.selectedUser = user;
   }
+
+  //get all user 
   getDTa() {
     this.socketService.getItems('user').then((response: any) => {
       this.getdata = response.user;
     })
   }
 
-  clickedMeDouble(index: any) {
-    if (index) {
-      this.delete = true;
-
-    }
-
-  }
+//remove message
   remove(index: number, message: any) {
     this.gb.swalFire().then((result: any) => {
       if (result.value) {
@@ -78,6 +78,10 @@ export class ChatComponent {
       }
     }
     )
+  }
+  
+  data() {
+    return this.senddata = new Date();
   }
 
 

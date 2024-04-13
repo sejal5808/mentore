@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NumberonlyDirective } from '../numberonly.directive';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { LightboxModule } from 'ngx-lightbox';
+import { ChiledComponent } from '../admin/chiled/chiled.component';
+import { TableComponent } from './table/table.component';
 
 
 // ####### Directive/pipes #######
@@ -16,7 +18,8 @@ import { LightboxModule } from 'ngx-lightbox';
 @NgModule({
 
   declarations: [
-NumberonlyDirective  ],
+NumberonlyDirective,
+TableComponent  ],
   imports: [
     CommonModule,
     NgxSummernoteModule,
@@ -43,7 +46,7 @@ NumberonlyDirective  ],
     LightboxModule,
     NgxSummernoteModule,
     CommonModule,
-
+    TableComponent
 
 
   ],

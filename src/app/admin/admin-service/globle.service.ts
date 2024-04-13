@@ -15,7 +15,7 @@ export class GlobleService {
     this.isSidebarActive = !this.isSidebarActive;
     console.log( this.isSidebarActive)
   }
-
+coursedata:any
   // private socket: Socket;
 
   constructor() {
