@@ -1,0 +1,138 @@
+<div class="container">
+    <div class="row">
+        <div class=" d-flex mt-5 fs-3 justify-content-end pointer" (click)="openModel('Add','')">
+            <i class="bi bi-plus-square"></i>
+        </div>
+        <table class="table mt-5 border">
+            <thead class="tble">
+                <tr>
+                    <th class=" col-2 tble">Title</th>
+                    <th class=" col-2  tble">Day</th>
+                    <th class=" col-2 tble">time</th>
+                    <th class="col-2 tble">Date</th>
+                    <th class=" col-2 tble">Description</th>
+                    <th class="col-2 tble">Image</th>
+                    <th class=" col-2 tble">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of allEvent">
+
+                    <td>
+                        {{i.title}}
+                    </td>
+                    <td>{{i.day}}</td>
+                    <td>{{i.time}}</td>
+                    <td>{{i.date}}</td>
+                    <td [innerHTML]="i.description"></td>
+                    <td> <img src="{{i.image}}" height="50px" width="50px"> </td>
+                    <td>
+                        <i class="bi bi-pencil-square fs-5 me-2 pointer" (click)="openModel('Edit', i)"></i>
+                        <i class="bi bi-trash-fill fs-5  pointer" (click)="delete(i,'Event',allEvent)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">{{modelLabel}} Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="myForm">
+                <div class="modal-body">
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="title" class="form-label">Title:</label>
+                        <input type="text" id="title" class="form-control" placeholder="Title..."
+                            formControlName="title" 
+                            [class.border-danger]="f['title'].errors?.['required'] && (submitted || f['title']?.touched)">
+                        <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                            <div *ngIf="f['title'].errors['required']" class="text-danger mt-2">title is required</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="date" class="form-label">Date:</label>
+                        <input type="date" id="date" class="form-control" placeholder="Date..." formControlName="date">
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <label for="time" class="form-label">Time:</label>
+                        <input type="text" id="time" class="form-control" placeholder="Time..." formControlName="time">
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <input type="file" lass="form-control" id="image" placeholder="image..."
+                            (change)="onFileChange($event)" height="50px" width="50px">
+                        <img [src]="imageurl" *ngIf="!editFile && imageurl" width="50px" height="50px">
+                        <img [src]="imageurl" *ngIf="editFile" width="50px" height="50px">
+                    </div>
+                    <div class="col-12 col-md-12 mb-3">
+                        <select class="form-select" formControlName="day">
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wedenesday">Wedenesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="col-12 border border-secondary-subtle p-2" formGroupName="address">
+                        <div><label>Address</label></div>
+                        <label for="street">
+                            Street
+                            <input type="text" class="form-control" id="street" formControlName="street">
+                        </label>
+                        <label for="street">
+                            city
+                            <input type="text" class="form-control" id="city" formControlName="city">
+                        </label>
+                        <label for="street">
+                            state
+                            <input type="text" class="form-control" id="state" formControlName="state">
+                        </label>
+                        <label for="street">
+                            zip
+                            <input type="text" class="form-control" id="zip" [formControlName]="'zip'">
+                        </label>
+                    </div>
+                    <div class="col-12 col-md-12 ">
+                        <div id="summernote" [ngxSummernote]="config" name="description" formControlName="description">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Hobbies</label>
+                        <div *ngFor="let item of hobby.controls; let i = index" formArrayName="hobbies">
+                            <div class="position-relative">
+                                <input type="text" class="form-control mt-1" [formControlName]="i">
+                                <button (click)="removeHobby(i)" class="position-absolute end-0 top-0 btn btn-danger btn-sm" *ngIf="hobby.controls.length > 1">remove</button>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline-info btn-sm mt-2" (click)="addHobby()">Add</button>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                    (click)="closeModel()">Close</button>
+                <button type="button" class="btn btn-success" (click)="submit(myForm)"
+                    *ngIf="modelLabel == 'Add'">Submit</button>
+                <button type="button" class="btn btn-success" (click)="update(myForm)"
+                    *ngIf="modelLabel !== 'Add'">Update</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="!allEvent.length" class="fs-3 text-center">
+    Event Not Found..
+</div>

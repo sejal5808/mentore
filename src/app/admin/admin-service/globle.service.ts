@@ -9,11 +9,19 @@ import Swal from 'sweetalert2';
 })
 export class GlobleService {
   isSidebarActive: boolean = true;
+
+  isSidebarOpen:boolean = true;
   isSpinner: boolean = false;
   loginData: any = {};
+
   toggleSidebar() {
     this.isSidebarActive = !this.isSidebarActive;
     console.log( this.isSidebarActive)
+  }
+
+
+  sidebarToggle(){
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 coursedata:any
   // private socket: Socket;

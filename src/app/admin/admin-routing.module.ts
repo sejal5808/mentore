@@ -8,6 +8,7 @@ import { ListComponent } from './list/list.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChiledComponent } from './chiled/chiled.component';
 import { SecondChildComponent } from './second-child/second-child.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
             { path: "Add-course", component: ListComponent },
             {path:'parent',component:ParentComponent},
             {path:'child',component:ChiledComponent},
-            {path:'child2',component:SecondChildComponent}
+            {path:'child2',component:SecondChildComponent},
+            {path:'reactiveform',component:ReactiveFormComponent}
 
 
         ]

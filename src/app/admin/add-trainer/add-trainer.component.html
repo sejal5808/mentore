@@ -146,7 +146,7 @@
                     </div>
                     <div class="col-12 col-md-12 mb-3">
                         <input type="file" (change)="uploadFile($event)" lass="form-control" id="image" name="image"
-                            placeholder="image..." #image required>
+                            placeholder="image..." #image required >
                         <img src="{{img}}" alt="" *ngIf="img && editFile" width="50px" height="50px">
                         <img [src]="serive.imageUrl+'Trainer'+'/' + formObj.image" *ngIf="formObj.image && !editFile"
                             width="50px" height="50px">

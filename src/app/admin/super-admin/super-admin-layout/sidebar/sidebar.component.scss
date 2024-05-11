@@ -1,0 +1,23 @@
+// .sidebar{
+//     width: 250px;
+//     height: 100vh;
+//     background-color: black;
+//     color: white;
+// }
+
+ul li  {
+    padding: 2px 10px 2px 20px;
+}
+
+ul li:hover {
+    background: rgb(230, 225, 225);
+    color: black;
+}
+
+
+.sidebar-collapsed {
+   .link-ul span {
+        display: none;
+    }
+}
+

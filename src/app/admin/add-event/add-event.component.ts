@@ -71,6 +71,8 @@ time: new FormControl(''),
 
   submit(form: any) {
     this.submitted = true;
+    console.log("form>>>",form.value)
+    return
     if (form.valid) {
       console.log("form", form.value, this.myForm)
       this.service.postApi(form.value, 'add-event').then((res: any) => {
@@ -117,7 +119,10 @@ time: new FormControl(''),
     const reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      console.log("reader111",reader)
+
+      // reader.readAsDataURL(file);
+      console.log("reader222",reader)
 
       reader.onload = () => {
 
@@ -125,6 +130,7 @@ time: new FormControl(''),
           image: reader.result // Set Base64 image data
 
         });
+        console.log("form>>",this.myForm.value)
         this.imageurl = reader.result;
         this.editFile = true;
       };

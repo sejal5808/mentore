@@ -29,7 +29,7 @@ export class AddTrainerComponent {
     description: '',
     gender: '',
     expertise: [],
-    status: ''
+    status: 1
   }
 
   editFile: boolean = false;
@@ -50,11 +50,15 @@ export class AddTrainerComponent {
     this.modalLable = key;
     this.editFile = false;
     if (key == 'Add') {
+    console.log("add",this.formObj)
+
       this.formObj.status = 1;
+    console.log("add",this.formObj)
+
 
       // this.expertise.forEach((item:any) => {if(item.isChecked){item.isChecked = false;}});
       this.formObj.expertise = [];
-      this.dataForm.resetForm();
+      // this.dataForm.resetForm();
       $('#formModal').modal('show');
     }
     else {
@@ -88,7 +92,7 @@ export class AddTrainerComponent {
   }
 
   submit(form: any) {
-    console.log("33", this.formObj)
+    console.log("33", this.formObj,form.value)
     if (form.valid) {
       const formData = new FormData();
       formData.append('image', this.formObj.image);
@@ -140,6 +144,8 @@ export class AddTrainerComponent {
  }
   closeModel() {
     $('#formModal').modal('hide');
+    this.dataForm.resetForm();
+
   }
 
   delete(data: any, tableName: any, array: any) {

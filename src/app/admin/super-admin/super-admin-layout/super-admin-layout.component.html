@@ -1,0 +1,12 @@
+
+<div class="overall-layout">
+    <div class="sidebar" [ngClass]="gs.isSidebarOpen ? 'sidebar':'sidebar-collapsed'">
+        <app-sidebar></app-sidebar>
+    </div>
+    
+    <div class="main" [ngClass]="gs.isSidebarOpen ? 'main':'main-expand'">
+        <app-header></app-header>
+        <router-outlet></router-outlet>
+        <app-footer></app-footer>
+    </div>
+</div>

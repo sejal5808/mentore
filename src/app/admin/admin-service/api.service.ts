@@ -10,12 +10,12 @@ import { GlobleService } from './globle.service';
 })
 export class ApiService {
 
-  private apiUrl = 'http://192.168.1.21:8000/api/';
-  public imageUrl = 'http://192.168.1.21:8000/uploads/'
+  private apiUrl = 'http://192.168.1.25:8000/api/';
+  public imageUrl = 'http://192.168.1.25:8000/uploads/'
   isLayoutSidebarActive:boolean = false;
 
   constructor(private http: HttpClient,public gs:GlobleService) {
-    this.socket = io('http://192.168.1.21:8000', { transports : ['websocket'] });
+    this.socket = io('http://192.168.1.25:8000', { transports : ['websocket'] });
     this.socket.emit('login', this.gs.loginData._id);
    
    }

@@ -11,14 +11,14 @@ import { Observable, fromEvent } from 'rxjs';
 export class ServicetestService {
   loginData: any = {};
 
-  private apiUrl = 'http://192.168.1.21:8000/api/';
-  public imageUrl = 'http://192.168.1.21:8000/uploads/'
+  private apiUrl = 'http://192.168.1.25:8000/api/';
+  public imageUrl = 'http://192.168.1.25:8000/uploads/'
   isLayoutSidebarActive: boolean = false;
   private socket;
 
   constructor(private http: HttpClient,) {
     // user conntection with server  
-    this.socket = io('http://192.168.1.21:8000', { transports: ['websocket'] });
+    this.socket = io('http://192.168.1.25:8000', { transports: ['websocket'] });
 
   }
 

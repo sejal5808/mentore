@@ -14,6 +14,7 @@ import { ApiService } from './admin-service/api.service';
 import { ParentComponent } from './parent/parent.component';
 import { ChiledComponent } from './chiled/chiled.component';
 import { SecondChildComponent } from './second-child/second-child.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
 
 // const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 @NgModule({
@@ -28,6 +29,7 @@ import { SecondChildComponent } from './second-child/second-child.component';
     ParentComponent,
     ChiledComponent,
     SecondChildComponent,
+    ReactiveFormComponent,
   ],
   imports: [
     AdminRoutingModule,

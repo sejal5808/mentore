@@ -1,0 +1,29 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 100vh;
+    margin-left: 250px;
+    transition: all .3s;
+}
+
+app-footer {
+    margin-top: auto;
+    background: black;
+    color: white;
+    height: 10rem;
+}
+
+app-header {
+    background: rgb(212, 212, 236);
+    height: 4rem;
+    position: sticky;
+    top: 0;
+}
+
+
+
+.main-expand {
+    margin-left: 60px;
+    transition: all .3s;
+}

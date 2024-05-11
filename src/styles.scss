@@ -10,6 +10,33 @@
 # General
 --------------------------------------------------------------*/
 
+// sidbar ---------------->
+.sidebar {
+  position: fixed;
+  width: 250px;
+  left: 0;
+  top:0;
+  min-height: 100vh;
+  background: rgb(68, 67, 67);
+  color: white;
+  transition: all .3s;
+}
+
+.sidebar-collapsed {
+  width: 60px;
+  transition: all .3s;
+}
+
+.sidebar-collapsed {
+  .link-ul span {
+       display: none;
+   }
+}
+
+
+
+// sidebar css end
+
 body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
