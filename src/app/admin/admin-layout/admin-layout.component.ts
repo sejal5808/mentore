@@ -11,8 +11,9 @@ export class AdminLayoutComponent {
 
     ngOnInit():void {
       this.gs.loginData = JSON.parse(localStorage.getItem('userlogin') || '{}')
-
       
     }
+
+    
 }
 

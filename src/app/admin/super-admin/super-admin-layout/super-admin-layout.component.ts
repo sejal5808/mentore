@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { GlobleService } from '../../admin-service/globle.service';
 
 @Component({
@@ -8,6 +8,20 @@ import { GlobleService } from '../../admin-service/globle.service';
 })
 export class SuperAdminLayoutComponent {
 
-  constructor(public gs: GlobleService){}
+  constructor(public gs: GlobleService,
+              private renderer: Renderer2,
+  ){}
+
+  sidebarExpand(event:any){
+    if(!this.gs.isSidebarOpen){
+      this.renderer.removeClass(event.currentTarget, 'sidebar-collapsed');
+    }
+  }
+
+  sidebarCollapsed(event:any){
+    if(!this.gs.isSidebarOpen){
+      this.renderer.addClass(event.currentTarget, 'sidebar-collapsed');
+    }
+  }
 
 }

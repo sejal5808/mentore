@@ -1,6 +1,7 @@
 
 <div class="overall-layout">
-    <div class="sidebar" [ngClass]="gs.isSidebarOpen ? 'sidebar':'sidebar-collapsed'">
+    <div class="sidebar" [ngClass]="gs.isSidebarOpen ? 'sidebar':'sidebar-collapsed'"
+    (mouseover)="sidebarExpand($event)" (mouseout)="sidebarCollapsed($event)">
         <app-sidebar></app-sidebar>
     </div>
     
