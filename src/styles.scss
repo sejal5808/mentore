@@ -17,10 +17,10 @@
   left: 0;
   top:0;
   min-height: 100vh;
-  background: rgb(68, 67, 67);
-  color: white;
+  color: black;
   transition: all .3s;
-  z-index: 999;
+  z-index: 999;box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+  background-color: #fff;
 }
 
 .sidebar-collapsed {
